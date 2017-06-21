@@ -1,0 +1,14 @@
+{
+  "name": "constellation-test-server",
+  "version": "0.1.0",
+  "description": "A test server which emits dummy constellation events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Richard Fox <fox@xbox.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^3.0.0",
+  }
+}
