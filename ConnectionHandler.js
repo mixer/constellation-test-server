@@ -17,18 +17,18 @@ module.exports = class ConnectionHandler {
     }
 
     handleMessage(raw) {
-            console.log(raw);
-            const message = JSON.parse(raw);
+        console.log(raw);
+        const message = JSON.parse(raw);
 
-            if(message.type === 'method' && supportedMethods.includes(message.method)) {
-                message.params.events.forEach(event => {
-                    if(message.method === 'livesubscribe') {
-                        this.subscribe(event, message.params.interval || 1000);
-                    } else {
-                        this.unsubscribe(event);
-                    }
-                })
-            }
+        if(message.type === 'method' && supportedMethods.includes(message.method)) {
+            message.params.events.forEach(event => {
+                if(message.method === 'livesubscribe') {
+                    this.subscribe(event, message.params.interval || 1000);
+                } else {
+                    this.unsubscribe(event);
+                }
+            })
+        }
     }
 
     subscribe(event, interval) {

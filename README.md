@@ -7,16 +7,16 @@ A quick script which emulates subscribing to and recieving updates from [Constel
 1. `npm i`
 1. Start with `node index.js`
 
-The server defaults to running on 0.0.0.0:3000. 
+The server defaults to running on 0.0.0.0:3000.
 
 ## Use
 
 You can subscribe to the following events using standard [Constellation `livesubscribe` methods](https://dev.mixer.com/reference/constellation/index.html#methods_livesubscribe). Once subscribed you'll get events emitted that simulate what you'll see from the real constellation.
 
-- channel:id:followed
-- channel:id:subscribed
-- channel:id:resubscribed
-- channel:id:resubShared
+- `channel:id:followed`
+- `channel:id:subscribed`
+- `channel:id:resubscribed`
+- `channel:id:resubShared`
 
 Unlike constellation you can also pass an `interval` to the `livesubscribe` params. This will control how often you receive a sample event that you subscribe to. `interval` is **NOT** supported for the real constellation.
 
