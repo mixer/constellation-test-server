@@ -17,6 +17,8 @@ You can subscribe to the following events using standard [Constellation `livesub
 - `channel:id:subscribed`
 - `channel:id:resubscribed`
 - `channel:id:resubShared`
+- `channel:id:hosted`
+- `channel:id:unhosted`
 
 Unlike constellation you can also pass an `interval` to the `livesubscribe` params. This will control how often you receive a sample event that you subscribe to. `interval` is **NOT** supported for the real constellation.
 
