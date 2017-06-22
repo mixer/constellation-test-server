@@ -1,13 +1,14 @@
 const events = require('./events');
 
 const supportedMethods = ['livesubscribe', 'liveunsubscribe'];
-const supportedEvents = ['followed', 'subscribed', 'resubscribed', 'resubShared'];
+const supportedEvents = Object.keys(events);
 
 module.exports = class ConnectionHandler {
     constructor(ws) {
         console.log('Received new connection');
         this.ws = ws;
         this.timers = {};
+        this.ws.send(JSON.stringify({ type: 'event', event: 'hello', data: { authenticated: false } }));
         this.ws.on('message', message => this.handleMessage(message));
         this.ws.on('close', () => this.cleanUp());
     }
@@ -37,11 +38,12 @@ module.exports = class ConnectionHandler {
             console.log(`Unsupported event ${event}`);
             return;
         }
-        this.timers[event, setInterval(() => this.emitEvent(event), interval)];
+        this.timers[event] = setInterval(() => this.emitEvent(event), interval);
     }
+
     unsubscribe(event) {
-        clearInterval(this.timers[key]);
-        delete this.timers[key];
+        clearInterval(this.timers[event]);
+        delete this.timers[event];
     }
 
     addTimedEvent(fn, interval) {
@@ -49,6 +51,7 @@ module.exports = class ConnectionHandler {
         this.timers.push(timerId);
         return timerId;
     }
+
     emitEvent(event) {
         const type = event.split(':')[2];
         const packet = {
