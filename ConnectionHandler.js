@@ -19,7 +19,7 @@ module.exports = class ConnectionHandler {
 
     handleMessage(raw) {
         console.log(raw);
-        const message = JSON.parse(raw.trim());
+        const message = JSON.parse(raw);
 
         if(message.type === 'method' && supportedMethods.includes(message.method)) {
             message.params.events.forEach(event => {
