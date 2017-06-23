@@ -1,9 +1,9 @@
-const ws = require("ws");
-const ConnectionHandler = require("./ConnectionHandler");
+const ws = require('ws');
+const ConnectionHandler = require('./ConnectionHandler');
 
 const server = new ws.Server({
   port: 3000,
-  host: "0.0.0.0"
+  host: '0.0.0.0'
 });
 
-server.on("connection", ws => new ConnectionHandler(ws));
+server.on('connection', ws => new ConnectionHandler(ws));

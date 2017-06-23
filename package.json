@@ -4,13 +4,15 @@
   "description": "A test server which emits dummy constellation events",
   "main": "index.js",
   "scripts": {
-    "fmt": "prettier --write \"*.js\"",
+    "fmt": "prettier --single-quote --write \"*.js\"",
     "start": "node index.js"
   },
   "author": "Richard Fox <fox@xbox.com>",
   "license": "MIT",
   "dependencies": {
-    "prettier": "^1.4.4",
     "ws": "^3.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.4.4"
   }
 }

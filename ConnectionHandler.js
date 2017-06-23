@@ -1,22 +1,22 @@
-const events = require("./events");
+const events = require('./events');
 
-const supportedMethods = ["livesubscribe", "liveunsubscribe"];
+const supportedMethods = ['livesubscribe', 'liveunsubscribe'];
 const supportedEvents = Object.keys(events);
 
 module.exports = class ConnectionHandler {
   constructor(ws) {
-    console.log("Received new connection");
+    console.log('Received new connection');
     this.ws = ws;
     this.timers = {};
     this.ws.send(
       JSON.stringify({
-        type: "event",
-        event: "hello",
+        type: 'event',
+        event: 'hello',
         data: { authenticated: false }
       })
     );
-    this.ws.on("message", message => this.handleMessage(message));
-    this.ws.on("close", () => this.cleanUp());
+    this.ws.on('message', message => this.handleMessage(message));
+    this.ws.on('close', () => this.cleanUp());
   }
 
   cleanUp() {
@@ -28,11 +28,11 @@ module.exports = class ConnectionHandler {
     const message = JSON.parse(raw);
 
     if (
-      message.type === "method" &&
+      message.type === 'method' &&
       supportedMethods.includes(message.method)
     ) {
       message.params.events.forEach(event => {
-        if (message.method === "livesubscribe") {
+        if (message.method === 'livesubscribe') {
           this.subscribe(event, message.params.interval || 1000);
         } else {
           this.unsubscribe(event);
@@ -43,7 +43,7 @@ module.exports = class ConnectionHandler {
 
   subscribe(event, interval) {
     console.log(`subscribing to ${event}`);
-    if (!supportedEvents.includes(event.split(":")[2])) {
+    if (!supportedEvents.includes(event.split(':')[2])) {
       console.log(`Unsupported event ${event}`);
       return;
     }
@@ -62,10 +62,10 @@ module.exports = class ConnectionHandler {
   }
 
   emitEvent(event) {
-    const type = event.split(":")[2];
+    const type = event.split(':')[2];
     const packet = {
-      type: "event",
-      event: "live",
+      type: 'event',
+      event: 'live',
       data: {
         channel: event,
         payload: events[type]
